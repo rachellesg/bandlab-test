@@ -15,6 +15,16 @@ function fetchData() {
       posts = postsResult;
       users = usersResult;
       displayPosts(posts);
+
+      const userList = document.getElementById('userList');
+      userList.style.display = 'inline-block'
+
+      users.forEach(user => {
+        const option = document.createElement('option');
+        option.value = user.id;
+        option.textContent = user.name;
+        userList.appendChild(option);
+      });
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -35,6 +45,23 @@ sortButton.addEventListener('click', sortPosts);
 
 function displayPosts(posts) {
   const container = document.getElementById('container');
-  container.innerHTML = JSON.stringify(posts);
+  container.innerHTML = '';
 
+  posts.forEach(item => {
+    const itemContainer = document.createElement('div');
+
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+    itemContainer.appendChild(title);
+
+    const body = document.createElement('p');
+    body.textContent = item.body;
+    itemContainer.appendChild(body);
+
+    const userId = document.createElement('p');
+    userId.textContent = 'User ID: ' + item.userId;
+    itemContainer.appendChild(userId);
+
+    container.appendChild(itemContainer);
+  });
 }
