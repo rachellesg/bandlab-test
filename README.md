@@ -1,12 +1,14 @@
 # Bandlab Frontend Developer Test
 
+## Requirements
+
 ### Create a web application that has 2 pages:
 
 - Page 1:
   - The user can request and scroll through the list of posts returned by the JSON Placeholder API
   - The user can alphabetically sort the posts based on their title
   - The user can group the posts by user ID
-  - Page 2:
+- Page 2:
   - The user can choose to play different audio samples in the browser via the Web Audio API
 
 ### Requirements:
