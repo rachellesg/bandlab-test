@@ -1,6 +1,8 @@
 let posts;
 let users;
 
+const userList = document.getElementById('userList');
+
 function fetchData() {
   const fetchPosts = fetch(
     "https://jsonplaceholder.typicode.com/posts"
@@ -16,8 +18,8 @@ function fetchData() {
       users = usersResult;
       displayPosts(posts);
 
-      const userList = document.getElementById('userList');
       userList.style.display = 'inline-block'
+      sortButton.style.display = 'inline-block'
 
       users.forEach(user => {
         const option = document.createElement('option');
@@ -43,8 +45,6 @@ function sortPosts() {
 const sortButton = document.getElementById('sortButton');
 sortButton.addEventListener('click', sortPosts);
 
-const userList = document.getElementById('userList');
-
 userList.addEventListener('change', function () {
   const selectedUserId = this.value;
   const filteredPosts = [...posts].filter(post => post.userId == selectedUserId);
@@ -66,9 +66,12 @@ function displayPosts(posts) {
     body.textContent = item.body;
     itemContainer.appendChild(body);
 
-    const userId = document.createElement('p');
-    userId.textContent = 'User ID: ' + item.userId;
-    itemContainer.appendChild(userId);
+    const user = users.find(user => user.id === item.userId);
+    if (user) {
+      const userId = document.createElement('p');
+      userId.textContent = 'User: ' + user.name;
+      itemContainer.appendChild(userId);
+    }
 
     container.appendChild(itemContainer);
   });
