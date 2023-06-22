@@ -4,6 +4,8 @@ let users;
 const userList = document.getElementById('userList');
 
 function fetchData() {
+  userList.innerHTML = '';
+
   const fetchPosts = fetch(
     "https://jsonplaceholder.typicode.com/posts"
   ).then((response) => response.json());
