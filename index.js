@@ -43,6 +43,14 @@ function sortPosts() {
 const sortButton = document.getElementById('sortButton');
 sortButton.addEventListener('click', sortPosts);
 
+const userList = document.getElementById('userList');
+
+userList.addEventListener('change', function () {
+  const selectedUserId = this.value;
+  const filteredPosts = [...posts].filter(post => post.userId == selectedUserId);
+  displayPosts(filteredPosts);
+});
+
 function displayPosts(posts) {
   const container = document.getElementById('container');
   container.innerHTML = '';
